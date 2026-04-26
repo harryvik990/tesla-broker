@@ -9,6 +9,8 @@ interface NextButtonProps {
   label?: string
   testId?: string
   variant?: 'primary' | 'ghost'
+  /** Optional plan id ("starter" | "pro" | "enterprise") to forward to /get-started */
+  planId?: string
 }
 
 export default function NextButton({
@@ -17,6 +19,7 @@ export default function NextButton({
   label = 'Next',
   testId,
   variant = 'primary',
+  planId,
 }: NextButtonProps) {
   const navigate = useNavigate()
   const [loading, setLoading] = useState(false)
@@ -25,7 +28,8 @@ export default function NextButton({
     setLoading(true)
     await trackVisit(fromPage)
     setLoading(false)
-    navigate(to)
+    const target = planId ? `${to}?plan=${encodeURIComponent(planId)}` : to
+    navigate(target)
   }
 
   if (variant === 'ghost') {

@@ -1,0 +1,4 @@
+# SPA fallback — every non-asset route serves index.html so React Router works.
+# Cloudflare Pages serves /functions/* as Pages Functions, all other paths
+# are static; this rule sends client routes back to index.html.
+/*    /index.html   200

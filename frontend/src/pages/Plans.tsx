@@ -90,6 +90,7 @@ export default function PlansPage() {
                     fromPage={`plans-${plan.id}`}
                     label={plan.cta}
                     testId={`plan-cta-${plan.id}`}
+                    planId={plan.id}
                   />
                 </div>
               </div>

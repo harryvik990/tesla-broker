@@ -54,6 +54,14 @@ export type Step = {
 export const TELEGRAM_HANDLE = 'TMBsupport_X';
 export const TELEGRAM_URL = `https://t.me/${TELEGRAM_HANDLE}`;
 
+/** Build a Telegram deep-link with a pre-filled message.
+ * Telegram supports the `text` query param on https://t.me/<user>?text=...
+ * which opens the chat with the message ready to send. */
+export function buildTelegramLink(message?: string): string {
+  if (!message) return TELEGRAM_URL;
+  return `${TELEGRAM_URL}?text=${encodeURIComponent(message)}`;
+}
+
 export async function trackVisit(page: string): Promise<{ ok: boolean; visit_id?: string }> {
   try {
     const { data } = await apiClient.post('/visits', { page });

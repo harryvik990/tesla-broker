@@ -1,0 +1,21 @@
+[build]
+  base = "frontend"
+  command = "yarn install && yarn build"
+  publish = "dist"
+  functions = "../netlify/functions"
+
+[build.environment]
+  NODE_VERSION = "20"
+
+# Redirect /api/* calls to the Netlify Functions handler
+[[redirects]]
+  from = "/api/*"
+  to = "/.netlify/functions/api/:splat"
+  status = 200
+  force = true
+
+# SPA fallback — every other path serves index.html so React Router works
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
